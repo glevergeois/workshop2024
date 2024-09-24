@@ -21,13 +21,6 @@ class RegistrationFormType extends AbstractType
             ->add('email')
             ->add('firstName')
             ->add('lastName')
-            ->add('classroom', EntityType::class, [
-                'class' => Classroom::class,
-                'choice_label' => function (Classroom $classroom) {
-                    return $classroom->getLevel() . ' - ' . $classroom->getSpecialization();
-                },
-                'placeholder' => 'Choisir une classe', // Texte affiché par défaut
-            ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
