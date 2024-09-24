@@ -1,20 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Bienvenue sur notre site{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="container">
+    <!-- Bandeau avec le logo -->
+    <div class="header-banner">
+        <!-- Logo cliquable -->
+       
+            <img class="site-logo" src="{{ asset('build/images/logowork.png') }}" alt="Logo du site">
+        </a>
+    </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <!-- Profil à droite -->
+    <div class="profile">
+        <img src="/path/to/your/profile-icon.png" alt="Profil">
+        <p>Profil</p>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/guill/workshop2024/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/Users/guill/workshop2024/templates/home/index.html.twig</code></li>
-    </ul>
+    <!-- Liste de personnes à gauche -->
+    <aside class="people-list">
+        <ul>
+            <li>Noa</li>
+            <li>Enzo</li>
+            <li>Guillaume</li>
+            <li>Anastasiia</li>
+        </ul>
+    </aside>
+
+    <!-- Centre de la page : Boutons et liste de mots sous le bandeau -->
+    <div class="center-buttons">
+        <button>Écoles</button>
+        <button>Étudiants</button>
+
+        <div class="word-list">
+            <p>Hello</p>
+            <p>Bonjour</p>
+        </div>
+    </div>
 </div>
 {% endblock %}

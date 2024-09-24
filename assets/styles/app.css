@@ -1,3 +1,81 @@
 body {
-    background-color: skyblue;
+    font-family: sans-serif;
+}
+/* Conteneur principal */
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 100%;
+    padding: 20px;
+}
+
+/* Logo du site en haut à droite */
+.site-logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.site-logo img {
+    max-width: 100px;
+}
+
+/* Profil en dessous à droite */
+.profile {
+    position: absolute;
+    top: 100px;
+    left: 20px;
+    text-align: center;
+}
+
+.profile img {
+    width: 50px;
+    border-radius: 50%;
+}
+
+/* Boutons au centre */
+.center-buttons {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.center-buttons button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Liste de mots */
+.word-list {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.word-list p {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+/* Liste des personnes à gauche */
+.people-list {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 18px;
+}
+
+.people-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.people-list li {
+    margin-bottom: 10px;
 }
