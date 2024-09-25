@@ -44,6 +44,7 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'eventForm' => $form->createView(),
             'events' => $entityManager->getRepository(Events::class)->findAll(),
+            'users' => $entityManager->getRepository(User::class)->findAll(),
             'isFormInvalid' => $isFormInvalid,
         ]);
     }
