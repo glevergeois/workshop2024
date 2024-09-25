@@ -24,15 +24,6 @@ class EventFormType extends AbstractType
             ->add('participants')
             ->add('description')
             ->add('image')
-            ->add('create_at', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('update_at', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('delete_at', null, [
-                'widget' => 'single_text',
-            ])
         ;
     }
 

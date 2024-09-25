@@ -16,48 +16,35 @@ use Symfony\Component\Routing\Attribute\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(): Response
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-
-    #[Route('/', name: 'app_home')]
-    public function eventform(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
-    {
+        // Création d'un nouvel événement
         $event = new Events();
         $form = $this->createForm(EventFormType::class, $event);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var string $plainPassword */
-            $name = $form->get('name')->getData();
-            $date = $form->get('date')->getData();
-            $place = $form->get('place')->getData();
-            $participants = $form->get('participants')->getData();
-            $description = $form->get('description')->getData();
-            $image = $form->get('image')->getData();
+        $isFormInvalid = false;
 
-            // $classroomid = $request->get('classroom');
-
-            // $user->setClassroom($entityManager->getRepository(Classroom::class)->find((int)$classroomid));
-
-            // $user->setCreateAt(new \DateTimeImmutable());
-
-            // encode the plain password
-
-            $entityManager->persist($event);
-            $entityManager->flush();
-
-            // do anything else you need here, like send an email
-
-            return $this->redirectToRoute('app_home');
+        // Gestion de la soumission du formulaire
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $event->setCreateAt(new \DateTimeImmutable()); // Date de création automatique
+                $entityManager->persist($event);
+                $entityManager->flush();
+    
+                // Redirection vers la page d'accueil après la création de l'événement
+                return $this->redirectToRoute('app_home');
+            } else {
+                // Le formulaire est soumis mais invalide
+                $isFormInvalid = true;
+            }
         }
 
+        // Affichage de la liste des événements
         return $this->render('home/index.html.twig', [
-            'eventForm' => $form,
+            'eventForm' => $form->createView(),
             'events' => $entityManager->getRepository(Events::class)->findAll(),
+            'isFormInvalid' => $isFormInvalid,
         ]);
     }
 }

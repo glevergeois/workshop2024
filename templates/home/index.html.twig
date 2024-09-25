@@ -18,6 +18,9 @@
             <img src="/path/to/your/profile-icon.png" alt="Profil">
             <p>Profil</p>
         </div>
+        <div class="register">
+            <a href="{{ path('app_register') }}">S'inscrire</a>
+            <a href="{{ path('app_login') }}">Se connecter</a>
     </aside>
 
     <section id="events">
@@ -35,26 +38,15 @@
             <div class="add_event_modal-content">
                 <span class="close">&times;</span>
                 <form>
-                    {# <label for="event_name">Nom de l'événement</label>
-                    <input type="text" id="name" name="event_name" required><br>
-                    <label for="event_date">Date de l'événement</label>
-                    <input type="date" id="date" name="event_date" required><br>
-                    <label for="event_time">Heure de l'événement</label>
-                    <input type="time" id="time" name="event_description" required><br>
-                    <label for="event_description">Description de l'événement</label>
-                    <textarea id="event_description" name="event_description"></textarea><br>
-                    <label for="event_imageU">Ajouter une image</label>
-                    <input type="file" id="image" name="image" accept="image/*"><br>
-                    <label for="event_categories">Catégorie</label>
-                    <select name="classroom" id="classroom">
-                        <option value="">--Please choose an option--</option>
-                        {% for category in categories %}
-                            <option value={{ categories.id }}>{{ categories.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <input type="datalist" id="category" name="event_categories"><br>
-                    <input type="submit" value="Ajouter l'événement">
-                    <p> publié par {{ app.user.name }}</p>  #}
+
+                {# Afficher un message si le formulaire est invalide #}
+                    {% if isFormInvalid %}
+                        <div class="alert alert-danger">
+                            Le formulaire est invalide. Veuillez vérifier les champs et réessayer.
+                        </div>
+
+                {# Envoyer les données si le formulaire est valide #}
+                    {% endif %}
                     {{ form_errors(eventForm) }}
                     {{ form_start(eventForm) }}
                         {{ form_row(eventForm.name) }}
@@ -63,17 +55,6 @@
                         {{ form_row(eventForm.participants) }}
                         {{ form_row(eventForm.description) }}
                         {{ form_row(eventForm.image) }}
-                            {# {{ form_row(eventForm.plainPassword, {
-                                label: 'Password'
-                            }) }}
-                            <label for="classroom">Classroom:</label>
-
-                            <select name="classroom" id="classroom">
-                                <option value="">--Please choose an option--</option>
-                                {% for class in classroom %}
-                                    <option value={{ class.id }}>{{ class.level }} - {{ class.specialization }}</option>
-                                {% endfor %}
-                            </select> #}
                             <button type="submit" class="btn">Ajouter</button>
                     {{ form_end(eventForm) }}
                 </form>
@@ -82,12 +63,15 @@
             </div>
         </div>
         <div class="event-list">
-            <p>Hello</p>
-            <p>Bonjour</p>
-            <p>Bonjour</p>
-            <p>Bonjour</p>
-            <p>Bonjour</p>
-            <p>Bonjour</p>
+            <h3>Liste des événements</h2>
+
+                <ul>
+                    {% for event in events %}
+                        <li>{{ event.name }} - {{ event.date|date('Y-m-d H:i') }} à {{ event.place }}</li>
+                    {% else %}
+                        <h4>Aucun événement pour le moment.</h4>
+                    {% endfor %}
+                </ul>
         </div>
     </section>
     
