@@ -3,23 +3,99 @@
 {% block title %}Bienvenue sur notre site{% endblock %}
 
 {% block body %}
-<div class="container">
-    <!-- Bandeau avec le logo -->
-    <div class="header-banner">
-        <!-- Logo cliquable -->
-       
-            <img class="site-logo" src="{{ asset('build/images/logowork.png') }}" alt="Logo du site">
-        </a>
-    </div>
 
-    <!-- Profil à droite -->
-    <div class="profile">
-        <img src="/path/to/your/profile-icon.png" alt="Profil">
-        <p>Profil</p>
-    </div>
+    <aside id="left-aside">
+        <!-- Bandeau avec le logo -->
+        <div class="header-banner">
+            <!-- Logo cliquable -->
+        
+                <img class="site-logo" src="{{ asset('build/images/logowork.png') }}" alt="Logo du site">
+            </a>
+        </div>
 
+        <!-- Profil à droite -->
+        <div class="profile">
+            <img src="/path/to/your/profile-icon.png" alt="Profil">
+            <p>Profil</p>
+        </div>
+    </aside>
+
+    <section id="events">
+        <!-- Centre de la page : Boutons et liste de mots sous le bandeau -->
+        <div class="center-buttons">
+            <button>Écoles</button>
+            <button>Étudiants</button>
+            <!-- Trigger/Open The Modal -->
+            <button id="add_event">+</button>
+
+            <!-- The Modal -->
+            <div id="add_event_modal" class="modal">
+
+            <!-- Modal content -->
+            <div class="add_event_modal-content">
+                <span class="close">&times;</span>
+                <form>
+                    {# <label for="event_name">Nom de l'événement</label>
+                    <input type="text" id="name" name="event_name" required><br>
+                    <label for="event_date">Date de l'événement</label>
+                    <input type="date" id="date" name="event_date" required><br>
+                    <label for="event_time">Heure de l'événement</label>
+                    <input type="time" id="time" name="event_description" required><br>
+                    <label for="event_description">Description de l'événement</label>
+                    <textarea id="event_description" name="event_description"></textarea><br>
+                    <label for="event_imageU">Ajouter une image</label>
+                    <input type="file" id="image" name="image" accept="image/*"><br>
+                    <label for="event_categories">Catégorie</label>
+                    <select name="classroom" id="classroom">
+                        <option value="">--Please choose an option--</option>
+                        {% for category in categories %}
+                            <option value={{ categories.id }}>{{ categories.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="datalist" id="category" name="event_categories"><br>
+                    <input type="submit" value="Ajouter l'événement">
+                    <p> publié par {{ app.user.name }}</p>  #}
+                    {{ form_errors(eventForm) }}
+                    {{ form_start(eventForm) }}
+                        {{ form_row(eventForm.name) }}
+                        {{ form_row(eventForm.date) }}
+                        {{ form_row(eventForm.place) }}
+                        {{ form_row(eventForm.participants) }}
+                        {{ form_row(eventForm.description) }}
+                        {{ form_row(eventForm.image) }}
+                        {{ form_row(eventForm.create_at) }}
+                        {{ form_row(eventForm.update_at) }}
+                        {{ form_row(eventForm.delete_at) }}
+                            {# {{ form_row(eventForm.plainPassword, {
+                                label: 'Password'
+                            }) }}
+                            <label for="classroom">Classroom:</label>
+
+                            <select name="classroom" id="classroom">
+                                <option value="">--Please choose an option--</option>
+                                {% for class in classroom %}
+                                    <option value={{ class.id }}>{{ class.level }} - {{ class.specialization }}</option>
+                                {% endfor %}
+                            </select> #}
+                            <button type="submit" class="btn">Ajouter</button>
+                    {{ form_end(eventForm) }}
+                </form>
+            </div>
+
+            </div>
+        </div>
+        <div class="event-list">
+            <p>Hello</p>
+            <p>Bonjour</p>
+            <p>Bonjour</p>
+            <p>Bonjour</p>
+            <p>Bonjour</p>
+            <p>Bonjour</p>
+        </div>
+    </section>
+    
     <!-- Liste de personnes à gauche -->
-    <aside class="people-list">
+    <aside class="people-list" id="right-aside">
         <ul>
             <li>Noa</li>
             <li>Enzo</li>
@@ -28,15 +104,31 @@
         </ul>
     </aside>
 
-    <!-- Centre de la page : Boutons et liste de mots sous le bandeau -->
-    <div class="center-buttons">
-        <button>Écoles</button>
-        <button>Étudiants</button>
+<script>
+// Get the modal
+var modal = document.getElementById("add_event_modal");
 
-        <div class="word-list">
-            <p>Hello</p>
-            <p>Bonjour</p>
-        </div>
-    </div>
-</div>
+// Get the button that opens the modal
+var btn = document.getElementById("add_event");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
 {% endblock %}
