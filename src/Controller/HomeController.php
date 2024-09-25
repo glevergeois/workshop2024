@@ -2,15 +2,16 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
-use App\Form\EventFormType;
 use App\Entity\Events;
 use App\Entity\User;
+use App\Form\EventFormType;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
@@ -22,6 +23,7 @@ class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('/', name: 'app_home')]
     public function eventform(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $event = new Events();
@@ -36,9 +38,6 @@ class HomeController extends AbstractController
             $participants = $form->get('participants')->getData();
             $description = $form->get('description')->getData();
             $image = $form->get('image')->getData();
-            $create_at = $form->get('create_at')->getData();
-            $update_at = $form->get('update_at')->getData();
-            $delete_at = $form->get('delete_at')->getData();
 
             // $classroomid = $request->get('classroom');
 
