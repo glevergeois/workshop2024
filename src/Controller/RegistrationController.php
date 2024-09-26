@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Classroom;
+use App\Entity\Roles;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,12 +23,15 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
 
             $classroomid = $request->get('classroom');
 
             $user->setClassroom($entityManager->getRepository(Classroom::class)->find((int)$classroomid));
+
+            $user->setUserHasRole($entityManager->getRepository(Roles::class)->findOneBy(['name' => 'student']));
 
             $user->setCreateAt(new \DateTimeImmutable());
 

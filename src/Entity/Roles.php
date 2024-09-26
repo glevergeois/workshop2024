@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: RolesRepository::class)]
 class Roles
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
